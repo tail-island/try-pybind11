@@ -1,0 +1,8 @@
+#!/bin/sh
+
+pushd build
+
+make
+cp try_pybind11.* ../
+
+popd
