@@ -14,13 +14,7 @@ constexpr auto magic_number = 123;
 constexpr auto magic_word = "456";
 
 auto get_range_list(int n) noexcept {
-  auto result = std::vector<int>{};
-
-  for (const auto &i : ranges::views::iota(0, n)) {
-    result.emplace_back(i);
-  }
-
-  return result;
+  return ranges::views::iota(0, n) | ranges::to_vector;
 }
 
 // このやり方は駄目。
@@ -45,12 +39,8 @@ class MyList {
   std::vector<int> vector_;
 
 public:
-  MyList(int n) noexcept : vector_{} {
-    vector_.reserve(n);
-
-    for (const auto &i : ranges::views::iota(0, n)) {
-      vector_.emplace_back(i);
-    }
+  MyList(int n) noexcept : vector_(ranges::views::iota(0, n) | ranges::to_vector) {
+    ;
   }
 
   const auto &vector() const noexcept {
