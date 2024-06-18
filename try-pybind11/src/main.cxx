@@ -58,7 +58,7 @@ auto array_sum(const pybind11::array_t<int> &array) noexcept {
   auto result = 0;
 
   for (const auto &i: ranges::views::iota(static_cast<pybind11::ssize_t>(0), array_.shape(0))) {
-    for (const auto &j: ranges::views::iota(static_cast<pybind11::ssize_t>(1), array_.shape(0))) {
+    for (const auto &j: ranges::views::iota(static_cast<pybind11::ssize_t>(0), array_.shape(1))) {
       result += array_(i, j);
     }
   }
