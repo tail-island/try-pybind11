@@ -3,7 +3,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/numpy.h>
 #include <pybind11/stl.h>
-#include <range/v3/all.hpp>
+#include <ranges>
 #include <vector>
 
 auto add(int x, int y) noexcept {
@@ -14,7 +14,7 @@ constexpr auto magic_number = 123;
 constexpr auto magic_word = "456";
 
 auto get_range_list(int n) noexcept {
-  return ranges::views::iota(0, n) | ranges::to_vector;
+  return std::views::iota(0, n) | std::ranges::to<std::vector>();
 }
 
 // このやり方は駄目。
@@ -39,7 +39,7 @@ class MyList {
   std::vector<int> vector_;
 
 public:
-  MyList(int n) noexcept : vector_(ranges::views::iota(0, n) | ranges::to_vector) {
+  MyList(int n) noexcept : vector_(std::views::iota(0, n) | std::ranges::to<std::vector>()) {
     ;
   }
 
@@ -57,8 +57,8 @@ auto array_sum(const pybind11::array_t<int> &array) noexcept {
 
   auto result = 0;
 
-  for (const auto &i: ranges::views::iota(static_cast<pybind11::ssize_t>(0), array_.shape(0))) {
-    for (const auto &j: ranges::views::iota(static_cast<pybind11::ssize_t>(0), array_.shape(1))) {
+  for (const auto &i: std::views::iota(static_cast<pybind11::ssize_t>(0), array_.shape(0))) {
+    for (const auto &j: std::views::iota(static_cast<pybind11::ssize_t>(0), array_.shape(1))) {
       result += array_(i, j);
     }
   }

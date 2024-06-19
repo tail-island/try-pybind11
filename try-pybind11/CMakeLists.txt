@@ -5,7 +5,6 @@ project(try_pybind11 LANGUAGES CXX)
 find_package(Boost REQUIRED)
 
 include(cmake/pybind11.cmake)
-include(cmake/range-v3.cmake)
 
 pybind11_add_module(try_pybind11
     src/main.cxx
@@ -22,5 +21,4 @@ target_compile_options(try_pybind11 PRIVATE
 target_link_libraries(try_pybind11 PRIVATE
     Boost::headers
     pybind11::headers
-    range-v3::range-v3
 )
