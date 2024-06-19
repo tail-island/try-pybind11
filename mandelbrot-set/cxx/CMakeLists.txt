@@ -13,6 +13,5 @@ target_compile_features(mandelbrot-set PRIVATE
 
 target_compile_options(mandelbrot-set PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>: /arch:AVX2 /fp:fast>
-    $<$<CXX_COMPILER_ID:GNU>: -march=native>
-    # $<$<CXX_COMPILER_ID:GNU>: -march=native -ffast-math>
+    $<$<CXX_COMPILER_ID:GNU>: -march=native -ffast-math>
 )
